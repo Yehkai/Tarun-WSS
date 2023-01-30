@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Globals;
 import frc.robot.RobotContainer;
+import frc.robot.commands.auto.Rotate2Obj;
 
 public class Vision extends SubsystemBase{
     
@@ -95,6 +96,7 @@ public class Vision extends SubsystemBase{
       
       return objects;
   }
+  
     @Override
     public void periodic()
     {

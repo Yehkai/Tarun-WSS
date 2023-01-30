@@ -14,7 +14,7 @@ public class Globals
     // public static double desOffsetX = 0.2; // currently not used
     // public static double desOffsetY = 0.2; // currently not used
     // public static double[] cW = RobotContainer.m_vision.getLine(); // currently not used
-    public static double convertPxToM = 0.000625; // 0.56/800 , 0.00058 good // Resolution
+    public static double convertPxToM = 0.0006075; // 0.56/800 , 0.00058 good // Resolution
     // public static double cameraAngle = 290; // currently not used
     // public static double armDefaultX = 0.20; // currently not used
     // public static double armDefaultY = 0.09; // currently not used
@@ -22,7 +22,7 @@ public class Globals
     // public static double targetXArmPick; // currently not used
     // public static double[] yellowBinDimension = {0.415,0.295};
     // public static double frontIROffset = 0.215;
-    public static double camera_offset = 0.12;
+    public static double camera_offset = 0.09;
     // public static double camera_mount_offset = 0.015; // currently not used
     public static double arm_offset_y = 0.13; // 0.125
     public static double arm_offset_z = 0.25;
@@ -60,7 +60,9 @@ public class Globals
      * 
      *  This array stores the number of items in each target area
 	   */
-    public static int[][] Targets = new int[][] {}; 
+    public static int[][] Targets = new int[][] {};
+
+    public static double curDir = 0; 
     // End condition for pick and place
     public static boolean WOBLoopCondition(){
         // loops targets
