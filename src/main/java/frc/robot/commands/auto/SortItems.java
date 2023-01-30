@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
+import frc.robot.Astar.Layout;
 import frc.robot.subsystems.Arm;
 
 public class SortItems extends SequentialCommandGroup{
@@ -55,11 +56,12 @@ public class SortItems extends SequentialCommandGroup{
         new MoveArm(new Translation2d(0.33,0.24), 0.5),
         new SelectCommand(
             Map.ofEntries(
-                Map.entry(CommandSelector.ONE,new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0)))),
-                Map.entry(CommandSelector.TWO, new MovetoB(new Pose2d(0.96, 2.45, new Rotation2d(0))))
+                Map.entry(CommandSelector.ONE,new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos))),
+                Map.entry(CommandSelector.TWO, new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBin2Pos)))
                 ), 
             SortItems::selectBin
         ),
+        new Align2Line(),
         new ViewItem()
         );
     }

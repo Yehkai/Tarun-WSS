@@ -38,6 +38,7 @@ public class RobotContainer {
   public static Layout m_layout;
   public static Grid m_Grid;
   public static AStarAlgorithm m_Astar;
+  public static OmniDriveOdometry m_odometry;
 
   public RobotContainer()
   {

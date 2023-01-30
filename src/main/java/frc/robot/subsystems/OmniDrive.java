@@ -118,7 +118,7 @@ public class OmniDrive extends SubsystemBase
         Globals.curDir = m_odometry.getPose().getRotation().getDegrees();
         return m_odometry.getPose().getRotation().getDegrees();
     }
-
+    
     public double Rotate2Obj(double x, double y){
          double robot_x = m_odometry.getPose().getTranslation().getX(),
                 robot_y = m_odometry.getPose().getTranslation().getY();

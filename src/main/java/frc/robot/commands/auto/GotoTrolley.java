@@ -39,17 +39,6 @@ public class GotoTrolley extends SequentialCommandGroup{
         return CommandSelector.Top;
   }
 
-  static public CommandSelector Rotate() {
-  
-    if (m_y > 4.92 && m_x > 0.21 && m_x < 2.04)
-        return CommandSelector.Left;
-    else if (m_y < 0.21 && m_x > 0.21 && m_x < 2.04)
-        return CommandSelector.Right;
-    else if (m_x < 0.75 && m_y > 0.21 && m_y < 4.92)
-        return CommandSelector.Bottom;
-    else 
-        return null;
-  }
   public GotoTrolley(double x, double y) {
     super(
       new SelectCommand(
@@ -64,18 +53,7 @@ public class GotoTrolley extends SequentialCommandGroup{
             ), 
         GotoTrolley::Move
       ),
-      new SelectCommand(
-        Map.ofEntries(
-            Map.entry(CommandSelector.Left, new MoveRobot(2, Math.PI/2, 0, 0, 0.3)),
-            Map.entry(CommandSelector.Right, new MoveRobot(2, -Math.PI/2, 0, 0, 0.3)),
-            Map.entry(CommandSelector.Bottom, new MoveRobot(2, 3*(Math.PI/4), 0, 0, 0.3)),
-            Map.entry(CommandSelector.TL, new MoveRobot(2, Math.PI/4, 0, 0, 0.3)),
-            Map.entry(CommandSelector.TR, new MoveRobot(2, -Math.PI/4, 0, 0, 0.3)),
-            Map.entry(CommandSelector.BL, new MovetoB(new Pose2d(x+0.35, y-0.35, new Rotation2d(0))))
-            ), 
-        GotoTrolley::Rotate
-      ),
-      new Align2Trolley(),
+      // new Align2Trolley(),
       new TrolleyHolder(1)
     );
     m_x = x;

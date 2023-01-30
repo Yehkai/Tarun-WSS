@@ -68,7 +68,7 @@ public class Globals
         // loops targets
       for(Globals.curTarget = 0; Globals.curTarget < 3; Globals.curTarget++) { 
         // loops items
-        for(Globals.curItemType = 0; Globals.curItemType < 3; Globals.curItemType++) {
+        for(Globals.curItemType = 0; Globals.curItemType < 4; Globals.curItemType++) {
           // while array is not empty
           while (Globals.Targets[Globals.curTarget][Globals.curItemType]>0) { 
             // check if box contains item
@@ -79,7 +79,10 @@ public class Globals
 
               Globals.curItemY = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+2];
               Globals.curItemX = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+1];
-              Globals.Targets[Globals.curTarget][Globals.curItemType]--;
+              if(Globals.curItemType==0 || Globals.curItemType==1)
+                Globals.Targets[Globals.curTarget][0]--;
+              else 
+                Globals.Targets[Globals.curTarget][Globals.curItemType-1]--;
               return false;
             }
             else // if box does not contain current item carry on
