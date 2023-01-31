@@ -33,10 +33,10 @@ public class SortItems extends SequentialCommandGroup{
     
     if (Globals.curBin == 0)
         return CommandSelector.ONE;
-    else if (Globals.curBin == 1)
-        return CommandSelector.TWO;
+    // else if (Globals.curBin == 1)
+    //     return CommandSelector.TWO;
     else 
-        return null;
+        return CommandSelector.TWO;
     
   }
   public SortItems() 

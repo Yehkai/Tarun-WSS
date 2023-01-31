@@ -8,22 +8,8 @@ public class Globals
     static public final int DNUM = 4;
     static public int debug[] = new int[DNUM];
     static public String[] debugNames = new String[] {"debug0", "debug1", "debug2", "debug3"};
-    // static public int loopCnt = 0;
-    // public static double baseOffsetX = -0.21; // currently not used
-    // public static double baseOffsetY = 0.415; // currently not used
-    // public static double desOffsetX = 0.2; // currently not used
-    // public static double desOffsetY = 0.2; // currently not used
-    // public static double[] cW = RobotContainer.m_vision.getLine(); // currently not used
     public static double convertPxToM = 0.0006075; // 0.56/800 , 0.00058 good // Resolution
-    // public static double cameraAngle = 290; // currently not used
-    // public static double armDefaultX = 0.20; // currently not used
-    // public static double armDefaultY = 0.09; // currently not used
-    // public static double[] itemOffsets = {0.01,0.003,0.015}; // currently not used
-    // public static double targetXArmPick; // currently not used
-    // public static double[] yellowBinDimension = {0.415,0.295};
-    // public static double frontIROffset = 0.215;
     public static double camera_offset = 0.09;
-    // public static double camera_mount_offset = 0.015; // currently not used
     public static double arm_offset_y = 0.13; // 0.125
     public static double arm_offset_z = 0.25;
     public static double gripper_offset = 0.16;
@@ -64,33 +50,51 @@ public class Globals
 
     public static double curDir = 0; 
     // End condition for pick and place
+    // NOTE: 2d array has 3 columns but there are 4 objects
     public static boolean WOBLoopCondition(){
-        // loops targets
-      for(Globals.curTarget = 0; Globals.curTarget < 3; Globals.curTarget++) { 
-        // loops items
-        for(Globals.curItemType = 0; Globals.curItemType < 4; Globals.curItemType++) {
+      // loops targets
+    for(Globals.curTarget = 0; Globals.curTarget < 3; Globals.curTarget++) { 
+      // loops items
+      for(Globals.curItemType = 0; Globals.curItemType < 4; Globals.curItemType++) {
+        // IF curItem is not any of the cokes
+        if(Globals.curItemType==0 || Globals.curItemType==1){
           // while array is not empty
-          while (Globals.Targets[Globals.curTarget][Globals.curItemType]>0) { 
-            // check if box contains item
+          while (Globals.Targets[Globals.curTarget][0]>0) { 
+              // check if box contains item
             if(RobotContainer.m_vision.getObjects()[Globals.curItemType*3]>0){ 
               // when last object is picked up, move on to 2nd pick up bin
-              if((RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3])==1)
+              if((RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])==1)
+                Globals.curBin++;
+  
+              Globals.curItemY = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+2];
+              Globals.curItemX = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+1];
+              Globals.Targets[Globals.curTarget][0]--; // decrements ONLY the column[0] with coke
+              return false;
+             }
+            else // if box does not contain current item carry on
+              break;
+           }
+         }
+        // If the item is not coke
+        else{
+          while (Globals.Targets[Globals.curTarget][Globals.curItemType-1]>0) { 
+          // check if box contains item
+            if(RobotContainer.m_vision.getObjects()[Globals.curItemType*3]>0){ 
+              // when last object is picked up, move on to 2nd pick up bin
+              if((RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])==1)
                 Globals.curBin++;
 
               Globals.curItemY = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+2];
               Globals.curItemX = RobotContainer.m_vision.getObjects()[Globals.curItemType*3+1];
-              if(Globals.curItemType==0 || Globals.curItemType==1)
-                Globals.Targets[Globals.curTarget][0]--;
-              else 
-                Globals.Targets[Globals.curTarget][Globals.curItemType-1]--;
+              Globals.Targets[Globals.curTarget][Globals.curItemType-1]--;
               return false;
             }
             else // if box does not contain current item carry on
               break; 
-            
           }
         }
       }
-      return true;
     }
+    return true;
+  }
 }

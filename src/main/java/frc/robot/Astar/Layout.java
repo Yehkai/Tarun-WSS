@@ -38,8 +38,8 @@ public class Layout {
     };
 
     //Robot needs to make final adjustment to align with stand
-    public static final int PickUpBinPos[] = {700,950,0};
-    public static final int PickUpBin2Pos[] = {700,2300,0};
+    public static final int PickUpBinPos[] = {700,1100,0};
+    public static final int PickUpBin2Pos[] = {700,2450,0};
     //These are coordinates of the red colored target area
     public static final int RedPos[][] = {
         //x, y, angle
@@ -57,14 +57,14 @@ public class Layout {
     };
  
     // Position for robot to go to for reading work order
-    public static final int workOrderPos[] = {950, 2038-500, 90};
+    public static final int workOrderPos[] = {350, 1200, 90};
 
     // Initial Position for robot to go to for disposing hazmat
     public static final int HazMatBinPos[] = {500, 980, 180};
 
     // Robot start position. Also the cleaning position
-    public static final int startPos[] = {210, 210, -90}; //start position
-    // public static final int startPos[] = {960, 1100, -90}; //For open house
+    // public static final int startPos[] = {210, 210, -90}; //start position
+    public static final int startPos[] = {960, 1100, -90}; //For open house
 
     private int walls[][];
     private int obs[][];

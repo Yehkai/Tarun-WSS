@@ -51,7 +51,7 @@ public class OmniDrive extends SubsystemBase
 
     // Sensors
     private final DigitalOutput outDebug8;
-
+    private double m_angle = 0;
     private final AHRS gyro;
 
     // Shuffleboard
@@ -67,6 +67,7 @@ public class OmniDrive extends SubsystemBase
     private final NetworkTableEntry D_odometry0 = tab.add("odo x", 0).getEntry();
     private final NetworkTableEntry D_odometry1 = tab.add("odo y", 0).getEntry();
     private final NetworkTableEntry D_odometry2 = tab.add("odo A", 0).getEntry();
+    private final NetworkTableEntry D_angle = tab.add("angle", 0).getEntry();
 
     //Subsystem for omnidrive
     public OmniDrive() {
@@ -122,23 +123,27 @@ public class OmniDrive extends SubsystemBase
     public double Rotate2Obj(double x, double y){
          double robot_x = m_odometry.getPose().getTranslation().getX(),
                 robot_y = m_odometry.getPose().getTranslation().getY();
+        double m_x = x;
+        double m_y = y;
         double angle = 0;
-        if (x - robot_x==0){
-          if (y-robot_y>0){
+        if (m_x - robot_x==0){
+          if (m_y-robot_y>0){
               angle = 0;
           }
           else
               angle = 180;
         }
-        else if (y - robot_y==0){
-          if (x-robot_x>0){
+        else if (m_y - robot_y==0){
+          if (m_x-robot_x>0){
               angle = -90;
           }
           else
               angle = 90;
         }
         else 
-          angle = -Math.atan2(y - robot_y, x - robot_x);
+          angle = Math.atan2(m_y - robot_y, m_x - robot_x)*180/Math.PI;
+          angle *= -1;
+          m_angle = angle;
         return angle;
       }
 
@@ -349,6 +354,7 @@ public class OmniDrive extends SubsystemBase
         D_odometry0.setDouble(value[0]);
         D_odometry1.setDouble(value[1]);
         D_odometry2.setDouble(value[2]);
+        D_angle.setDouble(m_angle);
   
     }
 }

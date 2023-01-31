@@ -18,6 +18,7 @@ public class AlignPicker extends MoveRobot {
     private final double _startSpeed;
     private double camera_offset_pixels = 25;
     private double camera_offset_M = 0.01;
+    private double ratio = 0;
     /**
      * This command is used to align the robot to the object that is to be picked
      */
@@ -31,8 +32,12 @@ public class AlignPicker extends MoveRobot {
     @Override
     public void initialize()
     {   
-        super.m_dist = ((Globals.curItemX -400 ) * Globals.convertPxToM - 0.01);
-       
+        
+        if(Globals.curItemType==0)
+            ratio =0.80;//(36-10.5)/(36);//hardcoded ratio
+        else
+            ratio = 1;
+        super.m_dist = ((Globals.curItemX -400 ) * Globals.convertPxToM)*ratio-0.01;
         super.initialize();
     }
 }

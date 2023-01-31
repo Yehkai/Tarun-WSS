@@ -46,17 +46,21 @@ public class AutoMainCmd extends SequentialCommandGroup
         
         // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
         
-        new MovetoB(new Pose2d(1.2, 0.35, new Rotation2d(0))),
-        new ReadWOB(),
-        new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
-        new Align2Line(),
+        // new MovetoB(new Pose2d(1.2, 0.35, new Rotation2d(0))),
+        // new ReadWOB(),
+        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
+        // new Align2Line(),
+        // new WaitCommand(2),
+        // new InstantCommand(()-> m_vision.getWOBItems()),
         new ViewItem(),
-        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
+        // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
+        // new MoveRobot(1, -0.1, 0, 0, 0.3)
         
+        // new RotatetoDir(RobotContainer.m_omnidrive.Rotate2Obj(0.5,1.1))//working
       
         //new AlignRobot()
             // new ViewItem(),
-            // new LoopCommands(new ProcessSeq())
+            new LoopCommands(new ProcessSeq())
         //new CP3()
         // new CP2()
         // new CP3()
