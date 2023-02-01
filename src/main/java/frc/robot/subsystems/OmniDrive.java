@@ -260,7 +260,7 @@ public class OmniDrive extends SubsystemBase
 
         //Estimates x and y speed from individual wheel speeds
         //See formula below
-        double xratio = 3.88/4.0;
+        double xratio = 1;//3.88/4.0;
         double speedX = xratio * (-(wheelSpeeds[0] + wheelSpeeds[2]) + wheelSpeeds[1])/2;
         double speedY = (-wheelSpeeds[0] + wheelSpeeds[2])/(0.866025*2);
 

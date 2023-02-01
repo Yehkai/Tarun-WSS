@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Globals;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.OmniDrive;
 import frc.robot.subsystems.Vision;
 
 public class GotoTrolley extends SequentialCommandGroup{
+  private final static OmniDrive m_omnidrive = RobotContainer.m_omnidrive;
   private static double m_x,m_y;
   private enum CommandSelector {
     Top, Left, Right, Bottom, TL, TR, BL
@@ -53,8 +55,8 @@ public class GotoTrolley extends SequentialCommandGroup{
             ), 
         GotoTrolley::Move
       ),
-      // new Align2Trolley(),
-      new TrolleyHolder(1)
+      new RotatetoDir(m_omnidrive.Rotate2Obj(x, y))
+      // new Align2Trolley()
     );
     m_x = x;
     m_y = y;

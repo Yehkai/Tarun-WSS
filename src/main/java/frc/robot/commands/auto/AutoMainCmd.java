@@ -52,15 +52,16 @@ public class AutoMainCmd extends SequentialCommandGroup
         // new Align2Line(),
         // new WaitCommand(2),
         // new InstantCommand(()-> m_vision.getWOBItems()),
-        new ViewItem(),
+        // new ViewItem(),
         // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
         // new MoveRobot(1, -0.1, 0, 0, 0.3)
         
         // new RotatetoDir(RobotContainer.m_omnidrive.Rotate2Obj(0.5,1.1))//working
       
         //new AlignRobot()
-            // new ViewItem(),
+            new ViewItem(),
             new LoopCommands(new ProcessSeq())
+            // new GotoTrolley(0.15, 4.35)
         //new CP3()
         // new CP2()
         // new CP3()
@@ -70,8 +71,32 @@ public class AutoMainCmd extends SequentialCommandGroup
         // new GotoTrolley(0.15, 4.35)
         // new Rotate2Obj(0.15, 4.35)
         // new Rotate(45, 0.3)
-            // new LoopCmd(new ProcessSeq(), ()->(++Globals.loopCnt)>4 ), /// loop cmd
-                
+            //new LoopCmd(new TestMotion(), ()->(++Globals.LoopCnt)>5 ) /// loop cmd
+                // new TestMotion(),
+                // new TestMotion(),
+                // new TestMotion(),
+                // new TestMotion(),
+                // new TestMotion()
+                // new MoveRobot(0, 0.0875, 0, 0, 0.4),
+                // // new WaitCommand(2),
+                // new MovetoB(new Pose2d(0.96, 1.6, new Rotation2d(0))),
+                // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
+                // new MoveRobot(0, 0.0875, 0, 0, 0.4),
+                // // new WaitCommand(2),
+                // new MovetoB(new Pose2d(0.96, 1.6, new Rotation2d(0))),
+                // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
+                // new MoveRobot(0, 0.0875, 0, 0, 0.4),
+                // // new WaitCommand(2),
+                // new MovetoB(new Pose2d(0.96, 1.6, new Rotation2d(0))),
+                // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
+                // new MoveRobot(0, 0.0875, 0, 0, 0.4),
+                // // new WaitCommand(2),
+                // new MovetoB(new Pose2d(0.96, 1.6, new Rotation2d(0))),
+                // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
+                // new MoveRobot(0, 0.0875, 0, 0, 0.4),
+                // // new WaitCommand(2),
+                // new MovetoB(new Pose2d(0.96, 1.6, new Rotation2d(0))),
+                // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0)))
               );
             
     }

@@ -48,7 +48,9 @@ public class ViewItem extends SequentialCommandGroup
         new InstantCommand(()-> m_arm.setCameraAngle(265)),
         new InstantCommand(()-> Globals.cvMode=1),
         new InstantCommand(m_vision::setcvMode),
-        new WaitCommand(3)
+        new WaitCommand(5),
+        new InstantCommand(()-> Globals.cvMode=-1),
+        new InstantCommand(m_vision::setcvMode)
         );
     }
    
