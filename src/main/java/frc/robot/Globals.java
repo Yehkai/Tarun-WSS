@@ -23,6 +23,8 @@ public class Globals
     public static int curItemType = 0;
     public static double curItemX;
     public static double curItemY;
+    public static double curX=0;
+    public static double curY=0;
     /*
      *  Red   = 0
      *  Green = 1

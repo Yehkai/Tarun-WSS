@@ -25,17 +25,17 @@ public class GotoTrolley extends SequentialCommandGroup{
 
   static public CommandSelector Move() {
   
-    if (m_y > 4.92 && m_x > 0.21 && m_x < 2.04)
+    if (m_y > 4.29 && m_x > 0.21 && m_x < 2.04)
         return CommandSelector.Left;
     else if (m_y < 0.21 && m_x > 0.21 && m_x < 2.04)
         return CommandSelector.Right;
-    else if (m_x < 0.75 && m_y > 0.21 && m_y < 4.92)
+    else if (m_x < 0.75 && m_y > 0.21 && m_y < 4.29)
         return CommandSelector.Bottom;
-    else if (m_x > 2.04 && m_y > 4.92)
+    else if (m_x > 2.04 && m_y > 4.29)
         return CommandSelector.TL;
     else if (m_x > 2.04 && m_y < 0.21)
         return CommandSelector.TR;
-    else if (m_x < 0.21 && m_y > 4.92)
+    else if (m_x < 0.21 && m_y > 4.29)
         return CommandSelector.BL;
     else 
         return CommandSelector.Top;
@@ -55,7 +55,9 @@ public class GotoTrolley extends SequentialCommandGroup{
             ), 
         GotoTrolley::Move
       ),
-      new RotatetoDir(m_omnidrive.Rotate2Obj(x, y))
+      new InstantCommand(()->RobotContainer.m_vision.getRobotXY()),
+      new WaitCommand(2)
+      //new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(x, y))
       // new Align2Trolley()
     );
     m_x = x;

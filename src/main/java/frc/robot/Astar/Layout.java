@@ -63,9 +63,9 @@ public class Layout {
     public static final int HazMatBinPos[] = {500, 980, 180};
 
     // Robot start position. Also the cleaning position
-    // public static final int startPos[] = {210, 210, -90}; //start position
-    public static final int startPos[] = {960, 1100, -90}; //For open house
-
+    public static final int startPos[] = {210, 210, -90}; //start position
+    // public static final int startPos[] = {960, 1100, -90}; //For open house
+    // public static final int startPos[] = {500, 4000, -90}; //For open house
     private int walls[][];
     private int obs[][];
 

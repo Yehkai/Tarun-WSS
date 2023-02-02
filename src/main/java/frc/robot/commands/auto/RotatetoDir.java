@@ -29,8 +29,8 @@ public class RotatetoDir extends SequentialCommandGroup {
         super(
             new SelectCommand(
                 Map.ofEntries( 
-                Map.entry(CommandSelector.POS, new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()>angle)), 
-                Map.entry(CommandSelector.NEG, new MoveRobotSense(2,-2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()<angle))),
+                Map.entry(CommandSelector.POS, new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()>=angle)), 
+                Map.entry(CommandSelector.NEG, new MoveRobotSense(2,-2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()<=angle))),
                  
             RotatetoDir::selectCmd12
            

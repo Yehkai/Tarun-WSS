@@ -55,13 +55,15 @@ public class AutoMainCmd extends SequentialCommandGroup
         // new ViewItem(),
         // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
         // new MoveRobot(1, -0.1, 0, 0, 0.3)
-        
-        // new RotatetoDir(RobotContainer.m_omnidrive.Rotate2Obj(0.5,1.1))//working
+        new GotoTrolley(0.15, 4.35),
+        new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
       
         //new AlignRobot()
-            new ViewItem(),
-            new LoopCommands(new ProcessSeq())
-            // new GotoTrolley(0.15, 4.35)
+            // new ViewItem(),
+            // new LoopCommands(new ProcessSeq())
+            // new GotoTrolley(0.15, 4.35),
+            // new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->RobotContainer.m_omnidrive.getDir()>=0)
+            
         //new CP3()
         // new CP2()
         // new CP3()
