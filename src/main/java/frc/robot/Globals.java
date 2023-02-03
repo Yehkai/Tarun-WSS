@@ -8,23 +8,25 @@ public class Globals
     static public final int DNUM = 4;
     static public int debug[] = new int[DNUM];
     static public String[] debugNames = new String[] {"debug0", "debug1", "debug2", "debug3"};
-    public static double convertPxToM = 0.000590;//0.0006075; // 0.56/800 , 0.00058 good // Resolution
+    public static double curDir = 0;
+    public static double convertPxToM = 0.000590;//0.0006075 // 0.56/800 , 0.00058 good // Resolution
     public static double camera_offset = 0.09;
+    // public static double camera_mount_offset = 0.015; // currently not used
     public static double arm_offset_y = 0.13; // 0.125
     public static double arm_offset_z = 0.25;
     public static double gripper_offset = 0.16;
     public static double CokeRatio = 0.85;
-    public static int LoopCnt =0;
+    public static int LoopCnt = 0; // use as counter for loops
     /*
-     *  Jagabee = 0
-     *  Dettol  = 1
-     *  Coke    = 2
+     *  CokeU = 0
+     *  Coke  = 1
+     *  Dettol  = 2
+     *  Jagabee = 3
      */
     public static int curItemType = 0;
     public static double curItemX;
     public static double curItemY;
-    public static double curX=0;
-    public static double curY=0;
+    public static double curAngle = 0;
     /*
      *  Red   = 0
      *  Green = 1
@@ -36,23 +38,23 @@ public class Globals
      *  Bin2 = 1
      */
     public static int curBin = 0;
-    /*
+    /*  
+     *  Idle = -1 (does nothing, use to turn off the other modes)
      *  Line detection = 0
      *  Object Detection = 1
      *  Work Order Board = 2
      */
-    public static int cvMode = 0;
+    public static int cvMode = -1;
     /*
-	   *                                              J|D|C              
+	   *                                              C|D|J              
 	   *                                            R|x|x|x|
-	   *                                            G|x|x|X|
+	   *                                            G|x|x|x|
 	   *                                            B|x|x|x|
      * 
      *  This array stores the number of items in each target area
+     *  NOTE: even though coke upright and coke are different objects, they are stored under the same column
 	   */
-    public static int[][] Targets = new int[][] {};
-
-    public static double curDir = 0; 
+    public static int[][] Targets = new int[][] {}; 
     // End condition for pick and place
     // NOTE: 2d array has 3 columns but there are 4 objects
     public static boolean WOBLoopCondition(){

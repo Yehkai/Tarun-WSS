@@ -17,6 +17,7 @@ import frc.robot.Globals;
 import frc.robot.RobotContainer;
 import frc.robot.Astar.Layout;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.OmniDrive;
 import frc.robot.subsystems.Sensor;
 import frc.robot.subsystems.Vision;
 import frc.robot.commands.auto.MoveRobotSense;
@@ -36,6 +37,7 @@ public class AutoMainCmd extends SequentialCommandGroup
     double temp;
     private final static Sensor m_sensor = RobotContainer.m_sensor;
     private final static Vision m_vision = RobotContainer.m_vision;
+    private final static OmniDrive m_omnidrive = RobotContainer.m_omnidrive;
     private final static Arm m_arm = RobotContainer.m_arm;
 
 	public AutoMainCmd() 
@@ -45,23 +47,26 @@ public class AutoMainCmd extends SequentialCommandGroup
         super(
         
         // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
-        
-        // new MovetoB(new Pose2d(1.2, 0.35, new Rotation2d(0))),
-        // new ReadWOB(),
-        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
-        // new Align2Line(),
-        // new WaitCommand(2),
+        new InstantCommand(()-> Globals.cvMode=-1),
+        new InstantCommand(m_vision::setcvMode),
+        new MovetoB(Layout.Convert_mm_Pose2d(Layout.workOrderPos)),
+        new ReadWOB(),
+        new SortTrolley(),
+        new WaitCommand(2),
+        new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
+        new Align2Line(),
+        new WaitCommand(2),
         // new InstantCommand(()-> m_vision.getWOBItems()),
-        // new ViewItem(),
-        // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
+        new ViewItem(),
+        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
         // new MoveRobot(1, -0.1, 0, 0, 0.3)
-        new GotoTrolley(0.15, 4.35),
-        new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
+        //new GotoTrolley(0.15, 4.35)
+        //new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
       
         //new AlignRobot()
             // new ViewItem(),
             // new LoopCommands(new ProcessSeq())
-            // new GotoTrolley(0.15, 4.35),
+            
             // new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->RobotContainer.m_omnidrive.getDir()>=0)
             
         //new CP3()
@@ -69,10 +74,7 @@ public class AutoMainCmd extends SequentialCommandGroup
         // new CP3()
         // new CP4()
         // new CP6()
-        // new RotatetoDir(45)
-        // new GotoTrolley(0.15, 4.35)
-        // new Rotate2Obj(0.15, 4.35)
-        // new Rotate(45, 0.3)
+        
             //new LoopCmd(new TestMotion(), ()->(++Globals.LoopCnt)>5 ) /// loop cmd
                 // new TestMotion(),
                 // new TestMotion(),

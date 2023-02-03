@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 //WPI imports
@@ -43,6 +43,7 @@ public class OmniDrive extends SubsystemBase
     private double curHeading, targetHeading;
     private double[] motorOuts;
     private int initCnt;
+    private double m_angle = 0;
     // Odometry class for tracking robot pose
     private final OmniDriveOdometry m_odometry;
     
@@ -67,8 +68,8 @@ public class OmniDrive extends SubsystemBase
     private final NetworkTableEntry D_odometry0 = tab.add("odo x", 0).getEntry();
     private final NetworkTableEntry D_odometry1 = tab.add("odo y", 0).getEntry();
     private final NetworkTableEntry D_odometry2 = tab.add("odo A", 0).getEntry();
-    
-
+    private final NetworkTableEntry D_angle = tab.add("angle", 0).getEntry();
+    private final NetworkTableEntry D_Global = tab.add(" dir", 0).getEntry();
     //Subsystem for omnidrive
     public OmniDrive() {
 
@@ -119,8 +120,144 @@ public class OmniDrive extends SubsystemBase
         Globals.curDir = m_odometry.getPose().getRotation().getDegrees();
         return m_odometry.getPose().getRotation().getDegrees();
     }
-    
+    public double[] getTCoord(Translation2d XY){
+        double[] coord = new double[2];
+        double x = XY.getX(),
+               y = XY.getY();
 
+        if (y > 4.29 && x > 0.21 && x < 2.04){
+            x += 0;
+            y -= 0.5;
+         }
+    else if (y < 0.21 && x > 0.21 && x < 2.04){
+        x += 0;
+        y += 0.5;
+    }
+        
+    else if (x < 0.75 && y > 0.21 && y < 4.29){
+        x += 0.5;
+        y += 0;
+    }
+        
+    else if (x > 2.04 && y > 4.29){
+        x -= 0.35;
+        y -= 0.35;
+    }
+        
+    else if (x > 2.04 && y < 0.21){
+        x -= 0.35;
+        y += 0.35;
+    }
+        
+    else if (x < 0.21 && y > 4.29){
+        x += 0.35;
+        y -= 0.35;
+    }
+        
+    else {
+        x -= 0.5;
+        y += 0;
+    }
+    coord[0] = x;
+    coord[1] = y;
+
+    return coord;
+    }
+    public double[] getColorCoord(Translation2d XY){
+        double[] coord = new double[2];
+        double x = XY.getX(),
+               y = XY.getY();
+
+        if (y > 4.29 && x > 0.21 && x < 2.04){
+            x += 0;
+            y -= 0.39;
+         }
+    else if (y < 0.21 && x > 0.21 && x < 2.04){
+        x += 0;
+        y += 0.39;
+    }
+        
+    else if (x < 0.75 && y > 0.21 && y < 4.29){
+        x += 0.39;
+        y += 0;
+    }
+        
+    else if (x > 2.04 && y > 4.29){
+        x -= 0.35;
+        y -= 0.35;
+    }
+        
+    else if (x > 2.04 && y < 0.21){
+        x -= 0.35;
+        y += 0.35;
+    }
+        
+    else if (x < 0.21 && y > 4.29){
+        x += 0.35;
+        y -= 0.35;
+    }
+        
+    else {
+        x -= 0.39;
+        y += 0;
+    }
+    coord[0] = x;
+    coord[1] = y;
+
+    return coord;
+    }
+    public double getAngle(double a){
+        double angle = a;
+        // angle = angle - getDir();
+        if (angle>180)
+            angle  = angle - 360;
+        else if (angle<-180)
+            angle = angle- 360;
+        else 
+            angle = angle + 0;
+        angle = angle * (Math.PI/180);
+        m_angle = angle;
+        return angle;
+    }
+    // public void getRobotXY(){
+    //     // double[] XY = new double[2];
+    //     Globals.curX = m_odometry.getPose().getTranslation().getX();
+    //     Globals.curY = m_odometry.getPose().getTranslation().getY();
+    //     // return XY;
+    // }
+    // public double Rotate2Obj(double x, double y){
+    //      double robot_x = Globals.curX,
+    //             robot_y = Globals.curY;
+    //     double m_x = x;
+    //     double m_y = y;
+    //     double angle = 0;
+    //     if (m_x-robot_x>-0.05 && m_x-robot_x<0.05){
+    //       if (m_y-robot_y>0){
+    //           angle = 0.01;
+    //       }
+    //       else
+    //           angle = 179.9;
+    //     }
+    //     else if (m_y-robot_y>-0.05 && m_y-robot_y<0.05){
+    //       if (m_x-robot_x>0){
+    //           angle = -90;
+    //       }
+    //       else
+    //           angle = 90;
+    //     }
+    //     else {
+    //       angle = (Math.atan2(m_y - robot_y, m_x - robot_x)*180/Math.PI);
+    //       if(angle>-90 && angle<180){
+    //         angle -= 90;
+    //         }
+    //       else 
+    //         angle += 270;
+    //     }
+    //     // double a = 0;
+        
+    //     m_angle = 2;
+    //     return angle;
+    //   }
     public Pose2d getPose() {
         return m_odometry.getPose();
     }
@@ -328,7 +465,8 @@ public class OmniDrive extends SubsystemBase
         D_odometry0.setDouble(value[0]);
         D_odometry1.setDouble(value[1]);
         D_odometry2.setDouble(value[2]);
-        
-  
+        // getDir();
+        D_angle.setDouble(Globals.curAngle);
+        D_Global.setDouble(Globals.curDir);
     }
 }

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Globals;
 import frc.robot.OmniDriveOdometry;
 import frc.robot.RobotContainer;
-import frc.robot.commands.auto.Rotate2Obj;
+
 
 public class Vision extends SubsystemBase{
     
@@ -42,14 +42,15 @@ public class Vision extends SubsystemBase{
     private final NetworkTableEntry D_currentItemY = tab.add("CurrentItemY", 0).getEntry();
     private final NetworkTableEntry D_AddedArmX = tab.add("AddedArmX", 0).getEntry();
     private final NetworkTableEntry D_AddedRobotX = tab.add("AddedRobotX", 0).getEntry();
-    private final NetworkTableEntry D_angle = tab.add("angle", 0).getEntry();
+    
     // private final NetworkTableEntry D_useTF = tab.add("useTF", 0).getEntry();
-    private double[] defaultValue = new double[1];
-    private double m_angle = 0;
+    private double[] defaultValue = new double[12];
+    
     public Vision(){
 
         m_arm.setCameraAngle(280); // Look down
-       
+        // Globals.cvMode = -1;
+        // setcvMode();
     }
 
     public double [] getLine(){
@@ -102,45 +103,7 @@ public class Vision extends SubsystemBase{
       
       return objects;
   }
-  public void getRobotXY(){
-    // double[] XY = new double[2];
-    Globals.curX = m_odometry.getPose().getTranslation().getX();
-    Globals.curY = m_odometry.getPose().getTranslation().getY();
-    // return XY;
-}
-public double Rotate2Obj(double x, double y){
-     double robot_x = Globals.curX,
-            robot_y = Globals.curY;
-    double m_x = x;
-    double m_y = y;
-    double angle = 0;
-    if (m_x-robot_x>-0.05 && m_x-robot_x<0.05){
-      if (m_y-robot_y>0){
-          angle = 0.01;
-      }
-      else
-          angle = 179.9;
-    }
-    else if (m_y-robot_y>-0.05 && m_y-robot_y<0.05){
-      if (m_x-robot_x>0){
-          angle = -90;
-      }
-      else
-          angle = 90;
-    }
-    else {
-      angle = (Math.atan2(m_y - robot_y, m_x - robot_x)*180/Math.PI);
-      if(angle>-90 && angle<180){
-        angle -= 90;
-        }
-      else 
-        angle += 270;
-    }
-    // double a = 0;
-    
-    m_angle = 2;
-    return angle;
-  }
+  
     @Override
     public void periodic()
     {
@@ -154,7 +117,7 @@ public double Rotate2Obj(double x, double y){
         // D_JagabeeCount.setNumber(getObjects()[0]);
         // D_DettolCount.setNumber(getObjects()[3]);
         // D_CokeCount.setNumber(getObjects()[6]);
-        D_angle.setDouble(Globals.curX);
+        //
     
     }
 }

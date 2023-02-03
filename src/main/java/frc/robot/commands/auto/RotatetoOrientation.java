@@ -7,7 +7,7 @@ import frc.robot.Globals;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.OmniDrive;
 
-public class RotatetoDir extends SequentialCommandGroup {
+public class RotatetoOrientation extends SequentialCommandGroup {
     public final static OmniDrive m_omnidrive = RobotContainer.m_omnidrive;
     private static double dir;
     private enum CommandSelector {
@@ -24,7 +24,7 @@ public class RotatetoDir extends SequentialCommandGroup {
             return null;
         
     }
-    public RotatetoDir(double angle){
+    public RotatetoOrientation(double angle){
         
         super(
             new SelectCommand(
@@ -32,7 +32,7 @@ public class RotatetoDir extends SequentialCommandGroup {
                 Map.entry(CommandSelector.POS, new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()>=angle)), 
                 Map.entry(CommandSelector.NEG, new MoveRobotSense(2,-2*Math.PI,0,0,0.3,()->m_omnidrive.getDir()<=angle))),
                  
-            RotatetoDir::selectCmd12
+            RotatetoOrientation::selectCmd12
            
         )
         );

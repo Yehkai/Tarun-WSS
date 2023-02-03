@@ -20,7 +20,9 @@ public class Align2Trolley extends SequentialCommandGroup{
       new InstantCommand(()-> Globals.cvMode = 0),
       new InstantCommand(m_vision::setcvMode),
       new AlignRobot("trolley"),
-      new MoveRobot(1, 0.12, 0, 0, 0.1)
+      new InstantCommand(()-> Globals.cvMode=-1),
+      new InstantCommand(m_vision::setcvMode),
+      new MoveRobot(1, 0.13, 0, 0, 0.1)
       
     );
   }
