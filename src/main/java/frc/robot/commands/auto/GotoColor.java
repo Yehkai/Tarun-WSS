@@ -24,27 +24,7 @@ public class GotoColor extends SequentialCommandGroup {
   private static double m_x, m_y;
   private static double angle;
 
-  private enum CommandSelector {
-    Top, Left, Right, Bottom, TL, TR, BL
-  }
-
-  // static public CommandSelector Move() {
-
-  //   if (m_y > 4.29 && m_x > 0.21 && m_x < 2.04)
-  //       return CommandSelector.Left;
-  //   else if (m_y < 0.21 && m_x > 0.21 && m_x < 2.04)
-  //       return CommandSelector.Right;
-  //   else if (m_x < 0.75 && m_y > 0.21 && m_y < 4.29)
-  //       return CommandSelector.Bottom;
-  //   else if (m_x > 2.04 && m_y > 4.29)
-  //       return CommandSelector.TL;
-  //   else if (m_x > 2.04 && m_y < 0.21)
-  //       return CommandSelector.TR;
-  //   else if (m_x < 0.21 && m_y > 4.29)
-  //       return CommandSelector.BL;
-  //   else 
-  //       return CommandSelector.Top;
-  // }
+  
   /**
    * This command moves the robot in front of the target and rotates to face it
    * @param pose - Coordinates of trolley in Pose2d(Use Layout.Convert_mm_Pose2d(int[] from Layout))
@@ -62,7 +42,7 @@ public class GotoColor extends SequentialCommandGroup {
     //         Map.entry(CommandSelector.BL, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 + 0.35, pose.getTranslation().getY() - 0.35, new Rotation2d(0))))),
     //     GotoColor::Move
     //   ),
-    new MovetoB(new Pose2d(m_omnidrive.getColorCoord(pose.getTranslation())[0], m_omnidrive.getColorCoord(pose.getTranslation())[1], new Rotation2d(0))),
+    new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation())[0], m_omnidrive.getCoord(pose.getTranslation())[1], new Rotation2d(0))),
       // new RotatetoOrientation2(pose.getRotation().getDegrees()),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new WaitCommand(1)

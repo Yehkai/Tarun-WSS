@@ -18,10 +18,8 @@ public class Align2Trolley extends SequentialCommandGroup{
       new MoveArm(new Translation2d(0.33,0.24), 0.5), // Line detection position
       new InstantCommand(()-> m_arm.setCameraAngle(280)),
       new InstantCommand(()-> Globals.cvMode = 0),
-      new InstantCommand(m_vision::setcvMode),
       new AlignRobot("trolley"),
       new InstantCommand(()-> Globals.cvMode=-1),
-      new InstantCommand(m_vision::setcvMode),
       new MoveRobot(1, 0.13, 0, 0, 0.1)
       
     );

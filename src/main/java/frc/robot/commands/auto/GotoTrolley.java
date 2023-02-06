@@ -25,29 +25,7 @@ public class GotoTrolley extends SequentialCommandGroup {
   private static double m_x, m_y;
   private static double angle;
   
-  private enum CommandSelector {
-    Top, Left, Right, Bottom, TL, TR, BL
-  }
-
-  static public CommandSelector Move() {
-    // Chooses XY offset based on trolley coordinates
-    if (m_y > 4.29 && m_x > 0.21 && m_x < 2.04)
-        return CommandSelector.Left;
-    else if (m_y < 0.21 && m_x > 0.21 && m_x < 2.04)
-        return CommandSelector.Right;
-    else if (m_x < 0.75 && m_y > 0.21 && m_y < 4.29)
-        return CommandSelector.Bottom;
-    else if (m_x > 2.04 && m_y > 4.29)
-        return CommandSelector.TL;
-    else if (m_x > 2.04 && m_y < 0.21)
-        return CommandSelector.TR;
-    else if (m_x < 0.21 && m_y > 4.29)
-        return CommandSelector.BL;
-    else 
-        return CommandSelector.Top;
-    
-  }
-
+ 
   /**
    * This command moves the robot in front of the trolley and rotates to face it
    * @param pose - Coordinates of trolley in Pose2d(Use Layout.Convert_mm_Pose2d(int[] from Layout))
@@ -67,7 +45,7 @@ public class GotoTrolley extends SequentialCommandGroup {
       //       ), 
       //   GotoTrolley::Move
       // )
-      new MovetoB(new Pose2d(m_omnidrive.getTCoord(pose.getTranslation())[0], m_omnidrive.getTCoord(pose.getTranslation())[1], new Rotation2d(0))),
+      new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation())[0], m_omnidrive.getCoord(pose.getTranslation())[1], new Rotation2d(0))),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new Align2Trolley(),
       new WaitCommand(1)

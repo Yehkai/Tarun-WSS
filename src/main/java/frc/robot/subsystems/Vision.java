@@ -19,7 +19,7 @@ public class Vision extends SubsystemBase{
     
     private final ShuffleboardTab tab = Shuffleboard.getTab("Vision");
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
-    private NetworkTable table = inst.getTable("SmartDashboard");
+    private NetworkTable table = inst.getTable("Shuffleboard/Vision");
     // private final NetworkTableEntry D_cW = tab.add("cW", 0).getEntry();
     private final NetworkTableEntry D_targetX = tab.add("TargetX", 0).getEntry();
     private final NetworkTableEntry D_curTarget = tab.add("curTarget", 0).getEntry();
@@ -42,7 +42,7 @@ public class Vision extends SubsystemBase{
     private final NetworkTableEntry D_currentItemY = tab.add("CurrentItemY", 0).getEntry();
     private final NetworkTableEntry D_AddedArmX = tab.add("AddedArmX", 0).getEntry();
     private final NetworkTableEntry D_AddedRobotX = tab.add("AddedRobotX", 0).getEntry();
-    
+    private final NetworkTableEntry D_cvMode = tab.add("cvMode", 0).getEntry(); 
     // private final NetworkTableEntry D_useTF = tab.add("useTF", 0).getEntry();
     private double[] defaultValue = new double[12];
     
@@ -67,9 +67,9 @@ public class Vision extends SubsystemBase{
       return dimension[wh];
     }
 
-    public void setcvMode(){
-      SmartDashboard.putNumber("cvMode", Globals.cvMode);
-    }
+    // public void setcvMode(){
+    //   table.putNumber("cvMode", Globals.cvMode);
+    // }
     
     // gets the 1d array passed from networktables and stores it in a 2d array
     public void getWOBItems(){
@@ -90,7 +90,7 @@ public class Vision extends SubsystemBase{
     public double[] getObjects(){
      /*
        * 0 - CokeU Count
-       * 1,2 - Coke X,Y
+       * 1,2 - CokeU X,Y
        * 3 - Coke Count
        * 4,5 - Coke X,Y 
        * 6 - Dettol Count
@@ -99,7 +99,7 @@ public class Vision extends SubsystemBase{
        * 10,11 - Jagabee X,Y
        */
      
-      double[] objects = (SmartDashboard.getEntry("objects").getDoubleArray(defaultValue));
+      double[] objects = (table.getEntry("objects").getDoubleArray(defaultValue));
       
       return objects;
   }
@@ -117,7 +117,7 @@ public class Vision extends SubsystemBase{
         // D_JagabeeCount.setNumber(getObjects()[0]);
         // D_DettolCount.setNumber(getObjects()[3]);
         // D_CokeCount.setNumber(getObjects()[6]);
-        //
+        D_cvMode.setNumber(Globals.cvMode);
     
     }
 }

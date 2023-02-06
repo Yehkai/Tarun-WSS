@@ -120,91 +120,55 @@ public class OmniDrive extends SubsystemBase
         Globals.curDir = m_odometry.getPose().getRotation().getDegrees();
         return m_odometry.getPose().getRotation().getDegrees();
     }
-    public double[] getTCoord(Translation2d XY){
+     /**
+     * This method calculates the coordinates of the robot offset from the trolley/color paper
+     * @param XY - x and y coordinates of trolley/color paper
+     * @param num - 0 for trolley, 1 for target area
+     * @return - offset coordinates
+     */
+    public double[] getCoord(Translation2d XY){
         double[] coord = new double[2];
         double x = XY.getX(),
                y = XY.getY();
+        //double offset = (num==0)?0.4:0.39;
 
-        if (y > 4.29 && x > 0.21 && x < 2.04){
+        if (y > 4.29 && x > 0.21 && x < 2.04){ // Left
             x += 0;
-            y -= 0.5;
+            y -= 0.4;
          }
-    else if (y < 0.21 && x > 0.21 && x < 2.04){
-        x += 0;
-        y += 0.5;
-    }
-        
-    else if (x < 0.75 && y > 0.21 && y < 4.29){
-        x += 0.5;
-        y += 0;
-    }
-        
-    else if (x > 2.04 && y > 4.29){
-        x -= 0.35;
-        y -= 0.35;
-    }
-        
-    else if (x > 2.04 && y < 0.21){
-        x -= 0.35;
-        y += 0.35;
-    }
-        
-    else if (x < 0.21 && y > 4.29){
-        x += 0.35;
-        y -= 0.35;
-    }
-        
-    else {
-        x -= 0.5;
-        y += 0;
-    }
-    coord[0] = x;
-    coord[1] = y;
-
-    return coord;
-    }
-    public double[] getColorCoord(Translation2d XY){
-        double[] coord = new double[2];
-        double x = XY.getX(),
-               y = XY.getY();
-
-        if (y > 4.29 && x > 0.21 && x < 2.04){
+        else if (y < 0.21 && x > 0.21 && x < 2.04){ //Right
             x += 0;
-            y -= 0.39;
-         }
-    else if (y < 0.21 && x > 0.21 && x < 2.04){
-        x += 0;
-        y += 0.39;
-    }
-        
-    else if (x < 0.75 && y > 0.21 && y < 4.29){
-        x += 0.39;
-        y += 0;
-    }
-        
-    else if (x > 2.04 && y > 4.29){
-        x -= 0.35;
-        y -= 0.35;
-    }
-        
-    else if (x > 2.04 && y < 0.21){
-        x -= 0.35;
-        y += 0.35;
-    }
-        
-    else if (x < 0.21 && y > 4.29){
-        x += 0.35;
-        y -= 0.35;
-    }
-        
-    else {
-        x -= 0.39;
-        y += 0;
-    }
-    coord[0] = x;
-    coord[1] = y;
+            y += 0.4;
+        }
 
-    return coord;
+        else if (x < 0.75 && y > 0.21 && y < 4.29){ // Bottom
+            x += 0.4;
+            y += 0;
+        }
+
+        else if (x > 2.04 && y > 4.29){ // Top Left
+            x -= 0.3;
+            y -= 0.3;
+        }
+
+        else if (x > 2.04 && y < 0.21){ // Top Right
+            x -= 0.3;
+            y += 0.3;
+        }
+
+        else if (x < 0.21 && y > 4.29){ // Bottom Left
+            x += 0.3;
+            y -= 0.3;
+        }
+
+        else { // Top or anywhere else
+            x -= 0.4;
+            y += 0;
+        }
+        coord[0] = x;
+        coord[1] = y;
+
+        return coord;
     }
     public double getAngle(double a){
         double angle = a;
@@ -424,6 +388,9 @@ public class OmniDrive extends SubsystemBase
         m_odometry.resetPosition(Layout.Convert_mm_Pose2d(Layout.startPos));
         gyro.zeroYaw();
         curHeading = targetHeading = getYawRad();
+        for (int i=0; i<Constants.PID_NUM; i++){
+            pidControllers[i].reset();
+        }
    }
     /**
      * Code that runs once every robot loop

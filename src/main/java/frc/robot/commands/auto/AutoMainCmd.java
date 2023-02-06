@@ -46,19 +46,19 @@ public class AutoMainCmd extends SequentialCommandGroup
         
         super(
         
-        // new MovetoB(new Pose2d(0.96, 1.1, new Rotation2d(0))),
-        new InstantCommand(()-> Globals.cvMode=-1),
-        new InstantCommand(m_vision::setcvMode),
-        new MovetoB(Layout.Convert_mm_Pose2d(Layout.workOrderPos)),
-        new ReadWOB(),
-        new SortTrolley(),
-        new WaitCommand(2),
-        new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
-        new Align2Line(),
-        new WaitCommand(2),
-        // new InstantCommand(()-> m_vision.getWOBItems()),
-        new ViewItem(),
-        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
+        
+        // new InstantCommand(()-> Globals.cvMode=-1),
+        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.RedPos))
+        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.workOrderPos)),
+        // new ReadWOB(),
+        // new SortTrolley(),
+        // new WaitCommand(2),
+        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
+        // new Align2Line(),
+        // new WaitCommand(2),
+        // // new InstantCommand(()-> m_vision.getWOBItems()),
+        // new ViewItem(),
+        // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
         // new MoveRobot(1, -0.1, 0, 0, 0.3)
         //new GotoTrolley(0.15, 4.35)
         //new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
@@ -66,7 +66,7 @@ public class AutoMainCmd extends SequentialCommandGroup
         //new AlignRobot()
             // new ViewItem(),
             // new LoopCommands(new ProcessSeq())
-            
+            new ReadWOB()
             // new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->RobotContainer.m_omnidrive.getDir()>=0)
             
         //new CP3()
