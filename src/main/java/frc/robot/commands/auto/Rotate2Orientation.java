@@ -15,18 +15,15 @@ public class Rotate2Orientation extends MoveRobot {
     private final static OmniDrive m_drive = RobotContainer.m_omnidrive;
     private final static Vision m_vision = RobotContainer.m_vision;
     // private static double convertPxToMM = 0.1/50;
-    private final double _startSpeed;
-    private double camera_offset_pixels = 25;
-    private double camera_offset_M = 0.01;
-    private double ratio = 0;
-    private double m_angle = 0;
+    // private final double _startSpeed;
+    private double m_angle =0;
     /**
      * This command is used to align the robot to the object that is to be picked
      */
     public Rotate2Orientation(double angle){
         super(2, 0, 0, 0, 0.3);
-        _startSpeed = 0;  
-        m_angle = angle;
+        // m_angle = angle;
+        Globals.curAngle = angle;
     }
      /**
      * Runs before execute
@@ -34,15 +31,17 @@ public class Rotate2Orientation extends MoveRobot {
     @Override
     public void initialize()
     {   
-        m_angle = m_angle - m_drive.getDir();
+        m_angle = Globals.curAngle;
+        m_angle = m_angle - Globals.curDir;
+        // Globals.curAngle = m_angle;
         if (m_angle>180)
             m_angle  = m_angle - 360;
         else if (m_angle<-180)
-            m_angle = m_angle- 360;
+            m_angle = m_angle + 360;
         else 
             m_angle = m_angle + 0;
         m_angle = m_angle * (Math.PI/180);
-        Globals.curAngle = m_angle;
+        // Globals.curAngle = m_angle;   
         super.m_dist = m_angle;
         super.initialize();
     }

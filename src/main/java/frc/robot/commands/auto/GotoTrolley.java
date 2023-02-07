@@ -45,7 +45,7 @@ public class GotoTrolley extends SequentialCommandGroup {
       //       ), 
       //   GotoTrolley::Move
       // )
-      new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation())[0], m_omnidrive.getCoord(pose.getTranslation())[1], new Rotation2d(0))),
+      new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),0)[0], m_omnidrive.getCoord(pose.getTranslation(),0)[1], new Rotation2d(0))),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new Align2Trolley(),
       new WaitCommand(1)

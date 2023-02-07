@@ -62,6 +62,7 @@ public class SortItems extends SequentialCommandGroup{
             SortItems::selectBin
         ),
         new Align2Line(),
+        new MoveRobotSense(1, 0.3, 0, 0,0.25, ()-> RobotContainer.m_sensor.getIRDistance()<=15),
         new ViewItem()
         );
     }

@@ -48,17 +48,18 @@ public class AutoMainCmd extends SequentialCommandGroup
         
         
         // new InstantCommand(()-> Globals.cvMode=-1),
-        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.RedPos))
-        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.workOrderPos)),
-        // new ReadWOB(),
-        // new SortTrolley(),
-        // new WaitCommand(2),
-        // new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
-        // new Align2Line(),
-        // new WaitCommand(2),
-        // // new InstantCommand(()-> m_vision.getWOBItems()),
-        // new ViewItem(),
-        // new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
+        // new GotoColor(Layout.Convert_mm_Pose2d(Layout.BluePos))
+        // new Rotate2Orientation(Layout.Convert_mm_Pose2d(Layout.BluePos).getRotation().getDegrees())
+        new MovetoB(Layout.Convert_mm_Pose2d(Layout.workOrderPos)),
+        new ReadWOB(),
+        // // // new SortTrolley(),
+        // // // new WaitCommand(2),
+        new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
+        new Align2Line(),
+        // // new MoveRobotSense(1, 0.3, 0, 0,0.25, ()-> m_sensor.getIRDistance()<=15),
+        new WaitCommand(2),
+        new ViewItem(),
+        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
         // new MoveRobot(1, -0.1, 0, 0, 0.3)
         //new GotoTrolley(0.15, 4.35)
         //new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
@@ -66,7 +67,9 @@ public class AutoMainCmd extends SequentialCommandGroup
         //new AlignRobot()
             // new ViewItem(),
             // new LoopCommands(new ProcessSeq())
-            new ReadWOB()
+            
+
+            // new ReadWOB()
             // new MoveRobotSense(2,2*Math.PI,0,0,0.3,()->RobotContainer.m_omnidrive.getDir()>=0)
             
         //new CP3()
@@ -110,5 +113,6 @@ public class AutoMainCmd extends SequentialCommandGroup
         super.initialize();
         RobotContainer.m_omnidrive.initialise();
         RobotContainer.m_arm.initialize();
+    
     }
 }

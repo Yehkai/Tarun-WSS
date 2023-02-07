@@ -48,14 +48,17 @@ public class Vision extends SubsystemBase{
     
     public Vision(){
 
-        m_arm.setCameraAngle(280); // Look down
+        // m_arm.setCameraAngle(280); // Look down
+        // Globals.curBin =0;
+        // Globals.curTarget = 0;
+        // Globals.curItemType = 0;
         // Globals.cvMode = -1;
         // setcvMode();
     }
 
     public double [] getLine(){
 
-      double[] line = (SmartDashboard.getEntry("line").getDoubleArray(defaultValue));
+      double[] line = (table.getEntry("line").getDoubleArray(defaultValue));
       return line;
     }
     

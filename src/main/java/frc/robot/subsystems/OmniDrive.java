@@ -126,23 +126,23 @@ public class OmniDrive extends SubsystemBase
      * @param num - 0 for trolley, 1 for target area
      * @return - offset coordinates
      */
-    public double[] getCoord(Translation2d XY){
+    public double[] getCoord(Translation2d XY,int num){
         double[] coord = new double[2];
         double x = XY.getX(),
                y = XY.getY();
-        //double offset = (num==0)?0.4:0.39;
+        double offset = (num==0)?0.6:0.39;
 
         if (y > 4.29 && x > 0.21 && x < 2.04){ // Left
             x += 0;
-            y -= 0.4;
+            y -= offset;
          }
         else if (y < 0.21 && x > 0.21 && x < 2.04){ //Right
             x += 0;
-            y += 0.4;
+            y += offset;
         }
 
         else if (x < 0.75 && y > 0.21 && y < 4.29){ // Bottom
-            x += 0.4;
+            x += offset;
             y += 0;
         }
 
@@ -162,7 +162,7 @@ public class OmniDrive extends SubsystemBase
         }
 
         else { // Top or anywhere else
-            x -= 0.4;
+            x -= offset;
             y += 0;
         }
         coord[0] = x;
@@ -170,19 +170,7 @@ public class OmniDrive extends SubsystemBase
 
         return coord;
     }
-    public double getAngle(double a){
-        double angle = a;
-        // angle = angle - getDir();
-        if (angle>180)
-            angle  = angle - 360;
-        else if (angle<-180)
-            angle = angle- 360;
-        else 
-            angle = angle + 0;
-        angle = angle * (Math.PI/180);
-        m_angle = angle;
-        return angle;
-    }
+    
     // public void getRobotXY(){
     //     // double[] XY = new double[2];
     //     Globals.curX = m_odometry.getPose().getTranslation().getX();
@@ -433,6 +421,7 @@ public class OmniDrive extends SubsystemBase
         D_odometry1.setDouble(value[1]);
         D_odometry2.setDouble(value[2]);
         // getDir();
+        Globals.curDir = m_odometry.getPose().getRotation().getDegrees();
         D_angle.setDouble(Globals.curAngle);
         D_Global.setDouble(Globals.curDir);
     }

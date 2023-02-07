@@ -42,8 +42,7 @@ public class GotoColor extends SequentialCommandGroup {
     //         Map.entry(CommandSelector.BL, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 + 0.35, pose.getTranslation().getY() - 0.35, new Rotation2d(0))))),
     //     GotoColor::Move
     //   ),
-    new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation())[0], m_omnidrive.getCoord(pose.getTranslation())[1], new Rotation2d(0))),
-      // new RotatetoOrientation2(pose.getRotation().getDegrees()),
+    new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),1)[0], m_omnidrive.getCoord(pose.getTranslation(),1)[1], new Rotation2d(0))),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new WaitCommand(1)
       

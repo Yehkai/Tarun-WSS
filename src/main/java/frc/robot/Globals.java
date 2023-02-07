@@ -9,13 +9,13 @@ public class Globals
     static public int debug[] = new int[DNUM];
     static public String[] debugNames = new String[] {"debug0", "debug1", "debug2", "debug3"};
     public static double curDir = 0;
-    public static double convertPxToM = 0.000590;//0.0006075 // 0.56/800 , 0.00058 good // Resolution
+    public static double convertPxToM = 0.00066875;//0.000590;//0.0006075 // 0.56/800 , 0.00058 good // Resolution
     public static double camera_offset = 0.09;
     // public static double camera_mount_offset = 0.015; // currently not used
     public static double arm_offset_y = 0.13; // 0.125
     public static double arm_offset_z = 0.25;
     public static double gripper_offset = 0.16;
-    public static double CokeRatio = 0.85;
+    public static double CokeRatio = 0.86;
     public static int LoopCnt = 0; // use as counter for loops
     /*
      *  CokeU = 0
@@ -64,6 +64,9 @@ public class Globals
       for(Globals.curItemType = 0; Globals.curItemType < 4; Globals.curItemType++) {
         // IF curItem is not any of the cokes
         if(Globals.curItemType==0 || Globals.curItemType==1){
+          // when last object is picked up, move on to 2nd pick up bin
+          // if((RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])==1)
+          // Globals.curBin++;
           // while array is not empty
           while (Globals.Targets[Globals.curTarget][0]>0) { 
               // check if box contains item
@@ -77,12 +80,19 @@ public class Globals
               Globals.Targets[Globals.curTarget][0]--; // decrements ONLY the column[0] with coke
               return false;
              }
+             // last item not in box but still got items inside
+            // else if(Globals.curTarget==2 && Globals.curItemType==3 && (RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])>0){
+            //   Globals.curBin++;
+            //  }
             else // if box does not contain current item carry on
-              break;
+              break; 
            }
          }
         // If the item is not coke
         else{
+          // when last object is picked up, move on to 2nd pick up bin
+          // if((RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])==1)
+          //   Globals.curBin++;
           while (Globals.Targets[Globals.curTarget][Globals.curItemType-1]>0) { 
           // check if box contains item
             if(RobotContainer.m_vision.getObjects()[Globals.curItemType*3]>0){ 
@@ -95,6 +105,10 @@ public class Globals
               Globals.Targets[Globals.curTarget][Globals.curItemType-1]--;
               return false;
             }
+             // last item not in box but still got items inside
+            //  else if(Globals.curTarget==2 && Globals.curItemType==3 && (RobotContainer.m_vision.getObjects()[0*3]+RobotContainer.m_vision.getObjects()[1*3]+RobotContainer.m_vision.getObjects()[2*3]+RobotContainer.m_vision.getObjects()[3*3])>0){
+            //   Globals.curBin++;
+            //  }
             else // if box does not contain current item carry on
               break; 
           }
