@@ -106,7 +106,13 @@ public class Vision extends SubsystemBase{
       
       return objects;
   }
-  
+    public void initialize(){
+      // Code written here will run before execute //
+     Globals.curBin = 0;
+     Globals.curTarget = 0;
+     Globals.curItemType = 0;
+      
+    }
     @Override
     public void periodic()
     {
