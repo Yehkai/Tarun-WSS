@@ -22,8 +22,6 @@ import frc.robot.utils.OmniDriveOdometry;
 
 public class GotoTrolley extends SequentialCommandGroup {
   private final static OmniDrive m_omnidrive = RobotContainer.m_omnidrive;
-  private static double m_x, m_y;
-  private static double angle;
   
  
   /**
@@ -33,25 +31,12 @@ public class GotoTrolley extends SequentialCommandGroup {
    */
   public GotoTrolley(Pose2d pose) {
     super(
-      // new SelectCommand(
-      //   Map.ofEntries(
-      //       Map.entry(CommandSelector.Top, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5, pose.getTranslation().getY(), new Rotation2d(0)))),
-      //       Map.entry(CommandSelector.Left, new MovetoB(new Pose2d(pose.getTranslation().getX(), pose.getTranslation().getY()-0.5, new Rotation2d(0)))),
-      //       Map.entry(CommandSelector.Right, new MovetoB(new Pose2d(pose.getTranslation().getX(), pose.getTranslation().getY()+0.5, new Rotation2d(0)))),
-      //       Map.entry(CommandSelector.Bottom, new MovetoB(new Pose2d(pose.getTranslation().getX()+0.5, pose.getTranslation().getY(), new Rotation2d(0)))),
-      //       Map.entry(CommandSelector.TL, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.35, pose.getTranslation().getY()-0.35, new Rotation2d(0))))//,
-      //       Map.entry(CommandSelector.TR, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.35, pose.getTranslation().getY()+0.35, new Rotation2d(0)))),
-      //       Map.entry(CommandSelector.BL, new MovetoB(new Pose2d(pose.getTranslation().getX()+0.35, pose.getTranslation().getY()-0.35, new Rotation2d(0))))
-      //       ), 
-      //   GotoTrolley::Move
-      // )
-      new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),0)[0], m_omnidrive.getCoord(pose.getTranslation(),0)[1], new Rotation2d(0))),
+      
+      new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),"trolley")[0], m_omnidrive.getCoord(pose.getTranslation(),"trolley")[1], new Rotation2d(0))),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new Align2Trolley(),
       new WaitCommand(1)
       
     );
-    m_x = pose.getTranslation().getX();
-    m_y = pose.getTranslation().getY();
   }
 }

@@ -126,11 +126,11 @@ public class OmniDrive extends SubsystemBase
      * @param num - 0 for trolley, 1 for target area
      * @return - offset coordinates
      */
-    public double[] getCoord(Translation2d XY,int num){
+    public double[] getCoord(Translation2d XY,String type){
         double[] coord = new double[2];
         double x = XY.getX(),
                y = XY.getY();
-        double offset = (num==0)?0.6:0.39;
+        double offset = (type=="trolley")?0.6:0.39;
 
         if (y > 4.29 && x > 0.21 && x < 2.04){ // Left
             x += 0;

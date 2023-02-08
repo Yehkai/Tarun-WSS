@@ -21,8 +21,6 @@ import frc.robot.utils.OmniDriveOdometry;
 
 public class GotoColor extends SequentialCommandGroup {
   private final static OmniDrive m_omnidrive = RobotContainer.m_omnidrive;
-  private static double m_x, m_y;
-  private static double angle;
 
   
   /**
@@ -32,23 +30,13 @@ public class GotoColor extends SequentialCommandGroup {
    */
   public GotoColor(Pose2d pose) {
       super(
-        // new SelectCommand(
-    //     Map.ofEntries(Map.entry(CommandSelector.Top, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 - 0.39, pose.getTranslation().getY(), new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.Left, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5, pose.getTranslation().getY() - 0.39, new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.Right, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5, pose.getTranslation().getY() + 0.39, new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.Bottom, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 + 0.39, pose.getTranslation().getY(), new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.TL, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 - 0.35, pose.getTranslation().getY() - 0.35, new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.TR, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 - 0.35, pose.getTranslation().getY() + 0.35, new Rotation2d(0)))),
-    //         Map.entry(CommandSelector.BL, new MovetoB(new Pose2d(pose.getTranslation().getX()-0.5 + 0.35, pose.getTranslation().getY() - 0.35, new Rotation2d(0))))),
-    //     GotoColor::Move
-    //   ),
-    new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),1)[0], m_omnidrive.getCoord(pose.getTranslation(),1)[1], new Rotation2d(0))),
+  
+    new MovetoB(new Pose2d(m_omnidrive.getCoord(pose.getTranslation(),"color")[0], m_omnidrive.getCoord(pose.getTranslation(),"color")[1], new Rotation2d(0))),
       new Rotate2Orientation(pose.getRotation().getDegrees()),
       new WaitCommand(1)
       
     );
-    m_x = pose.getTranslation().getX();
-    m_y = pose.getTranslation().getY();
+
   
   }
 }

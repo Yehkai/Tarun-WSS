@@ -33,8 +33,6 @@ public class SortItems extends SequentialCommandGroup{
     
     if (Globals.curBin == 0)
         return CommandSelector.ONE;
-    // else if (Globals.curBin == 1)
-    //     return CommandSelector.TWO;
     else 
         return CommandSelector.TWO;
     
@@ -43,14 +41,14 @@ public class SortItems extends SequentialCommandGroup{
     {
         super(   
         new PickItemfromBin(),
-        new InstantCommand(()-> m_arm.setCameraAngle(280)),
+        new MoveCamera(290),
         new SelectCommand(
-                Map.ofEntries(
-                    Map.entry(CommandSelector.ONE, new GotoColor(Layout.Convert_mm_Pose2d(Layout.RedPos))),
-                    Map.entry(CommandSelector.TWO, new GotoColor(Layout.Convert_mm_Pose2d(Layout.GreenPos))),
-                    Map.entry(CommandSelector.THREE, new GotoColor(Layout.Convert_mm_Pose2d(Layout.BluePos)))
-                    ), 
-                SortItems::selectTarget
+            Map.ofEntries(
+                Map.entry(CommandSelector.ONE, new GotoColor(Layout.Convert_mm_Pose2d(Layout.RedPos))),
+                Map.entry(CommandSelector.TWO, new GotoColor(Layout.Convert_mm_Pose2d(Layout.GreenPos))),
+                Map.entry(CommandSelector.THREE, new GotoColor(Layout.Convert_mm_Pose2d(Layout.BluePos)))
+                ), 
+            SortItems::selectTarget
             ),
         new PlaceDown(),
         new MoveArm(new Translation2d(0.33,0.24), 0.5),

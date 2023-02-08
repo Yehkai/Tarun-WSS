@@ -21,17 +21,13 @@ public class Vision extends SubsystemBase{
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
     private NetworkTable table = inst.getTable("Shuffleboard/Vision");
     // private final NetworkTableEntry D_cW = tab.add("cW", 0).getEntry();
-    private final NetworkTableEntry D_targetX = tab.add("TargetX", 0).getEntry();
     private final NetworkTableEntry D_curTarget = tab.add("curTarget", 0).getEntry();
     private final NetworkTableEntry D_curBin = tab.add("curBin", 0).getEntry();
     private final NetworkTableEntry D_JagabeeCount = tab.add("JagCnt", 0).getEntry();
     private final NetworkTableEntry D_DettolCount = tab.add("DettolCnt", 0).getEntry();
     private final NetworkTableEntry D_CokeCount = tab.add("CokeCnt", 0).getEntry();
-
-    public final NetworkTableEntry D_targetXArm = tab.add("targetXArm", 0).getEntry();
     
     private final static Arm m_arm = RobotContainer.m_arm;
-    private final static OmniDriveOdometry m_odometry = RobotContainer.m_odometry;
     // private final String[] items = {
     //   "Dettol",
     //   "Jagabee",
@@ -111,6 +107,7 @@ public class Vision extends SubsystemBase{
      Globals.curBin = 0;
      Globals.curTarget = 0;
      Globals.curItemType = 0;
+     Globals.curAngle = 0;
       
     }
     @Override
@@ -121,8 +118,6 @@ public class Vision extends SubsystemBase{
         D_currentItem.setNumber(Globals.curItemType);
         D_currentItemX.setNumber(Globals.curItemX);
         D_currentItemY.setNumber(Globals.curItemY);
-        D_AddedRobotX.setNumber(((Globals.curItemX -400) * Globals.convertPxToM));
-        D_AddedArmX.setNumber(m_arm.getArmPos().getX() + Globals.camera_offset - (Globals.curItemY - getResolution(1)/2) * Globals.convertPxToM);
         // D_JagabeeCount.setNumber(getObjects()[0]);
         // D_DettolCount.setNumber(getObjects()[3]);
         // D_CokeCount.setNumber(getObjects()[6]);

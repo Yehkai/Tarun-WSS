@@ -22,7 +22,7 @@ public class Rotate2Orientation extends MoveRobot {
      */
     public Rotate2Orientation(double angle){
         super(2, 0, 0, 0, 0.3);
-        // m_angle = angle;
+        
         Globals.curAngle = angle;
     }
      /**

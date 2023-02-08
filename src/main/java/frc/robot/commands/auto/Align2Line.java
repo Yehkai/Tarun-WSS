@@ -18,7 +18,7 @@ public class Align2Line extends SequentialCommandGroup{
   public Align2Line(){
     super(
       new MoveArm(new Translation2d(0.33,0.24), 0.5), // Line detection position
-      new InstantCommand(()-> m_arm.setCameraAngle(290)),
+      new MoveCamera(290),
       new InstantCommand(()-> Globals.cvMode = 0),
       new AlignRobot(),
       new InstantCommand(()-> Globals.cvMode=-1),
