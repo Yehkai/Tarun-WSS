@@ -59,8 +59,16 @@ public class AutoMainCmd extends SequentialCommandGroup
         // // new MoveRobotSense(1, 0.3, 0, 0,0.25, ()-> m_sensor.getIRDistance()<=15),
         new WaitCommand(2),
         new ViewItem(),
-        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())
-        // new MoveRobot(1, -0.1, 0, 0, 0.3)
+        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition()),
+        new InstantCommand(()->Globals.curBin = 1),
+        new MoveArm(new Translation2d(0.33,0.24), 0.5), // Line detection position
+        new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBin2Pos)),
+        new Align2Line(),
+        new WaitCommand(2),
+        new ViewItem(),
+        new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition()),
+        // new MoveArm(new Translation2d(0.33,0.24), 0.5) // Line detection position
+        new MoveRobot(1, -0.1, 0, 0, 0.3)
         //new GotoTrolley(0.15, 4.35)
         //new RotatetoDir(RobotContainer.m_vision.Rotate2Obj(0.15,4.35))//working
       
@@ -113,6 +121,7 @@ public class AutoMainCmd extends SequentialCommandGroup
         super.initialize();
         RobotContainer.m_omnidrive.initialise();
         RobotContainer.m_arm.initialize();
+        RobotContainer.m_vision.initialize();
     
     }
 }
