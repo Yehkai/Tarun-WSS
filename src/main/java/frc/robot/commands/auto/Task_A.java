@@ -19,9 +19,9 @@ public class Task_A extends SequentialCommandGroup{
             // new WaitCommand(2),
             //## Sort Items ##//
             new MovetoB(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos)),
-            new Rotate2Orientation(-90),
+            new Rotate2Orientation(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos).getRotation().getDegrees()),
             new Align2Line(),
-            // new WaitCommand(2),
+            // // // new WaitCommand(2),
             new ViewItem(),
             new LoopCmd(new SortItems(), ()->Globals.WOBLoopCondition())//,
             // new InstantCommand(()->Globals.curBin = 1), // Change to second bin

@@ -37,6 +37,14 @@ public class SortItems extends SequentialCommandGroup{
         return CommandSelector.TWO;
     
   }
+  static public CommandSelector selectRotation() {
+    
+    if (Globals.curBin == 0)
+        return CommandSelector.ONE;
+    else 
+        return CommandSelector.TWO;
+    
+  }
   public SortItems() 
     {
         super(   
@@ -59,6 +67,14 @@ public class SortItems extends SequentialCommandGroup{
                 ), 
             SortItems::selectBin
         ),
+        new SelectCommand(
+            Map.ofEntries(
+                Map.entry(CommandSelector.ONE,new Rotate2Orientation(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos).getRotation().getDegrees())),
+                Map.entry(CommandSelector.TWO, new Rotate2Orientation(Layout.Convert_mm_Pose2d(Layout.PickUpBin2Pos).getRotation().getDegrees()))
+                ), 
+            SortItems::selectRotation
+        ),
+        
         new Align2Line(),
         new MoveRobotSense(1, 0.3, 0, 0,0.25, ()-> RobotContainer.m_sensor.getIRDistance()<=15),
         new ViewItem()

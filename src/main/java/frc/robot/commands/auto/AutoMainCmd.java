@@ -49,8 +49,8 @@ public class AutoMainCmd extends SequentialCommandGroup
         
         // new InstantCommand(()-> Globals.cvMode=-1),
         new Task_A()
+        // new GotoColor(Layout.Convert_mm_Pose2d(Layout.GreenPos))
         
-        // new GotoColor(Layout.Convert_mm_Pose2d(Layout.BluePos))
         // new Rotate2Orientation(Layout.Convert_mm_Pose2d(Layout.PickUpBinPos).getRotation().getDegrees())
         // // new MoveArm(new Translation2d(0.33,0.24), 0.5) // Line detection position
         // new MoveRobot(1, -0.1, 0, 0, 0.3)

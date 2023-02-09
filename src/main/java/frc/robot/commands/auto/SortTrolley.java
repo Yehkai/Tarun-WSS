@@ -12,18 +12,21 @@ public class SortTrolley extends SequentialCommandGroup{
             
             new GotoColor(Layout.Convert_mm_Pose2d(Layout.RedPos)),
             new TrolleyHolder(0),
+            new MoveRobot(1, -0.05, 0, 0, 0.1),
             
             new GotoTrolley(Layout.Convert_mm_Pose2d(Layout.T2Pos)),
             new TrolleyHolder(1),
             
             new GotoColor(Layout.Convert_mm_Pose2d(Layout.GreenPos)),
             new TrolleyHolder(0),
+            new MoveRobot(1, -0.05, 0, 0, 0.1),
             
             new GotoTrolley(Layout.Convert_mm_Pose2d(Layout.T3Pos)),
             new TrolleyHolder(1),
             
             new GotoColor(Layout.Convert_mm_Pose2d(Layout.BluePos)),
-            new TrolleyHolder(0)
+            new TrolleyHolder(0),
+            new MoveRobot(1, -0.05, 0, 0, 0.1)
         );
     }
     

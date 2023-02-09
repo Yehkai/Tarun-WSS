@@ -21,7 +21,7 @@ public class Align2Trolley extends SequentialCommandGroup{
       new AlignRobot("trolley"),
       new InstantCommand(()-> Globals.cvMode=-1),
       new WaitCommand(2),
-      new MoveRobot(1, 0.13, 0, 0, 0.1)
+      new MoveRobot(1, 0.03, 0, 0, 0.1)
       
     );
   }

@@ -38,8 +38,8 @@ public class Layout {
     };
 
     //Coordinates of PickUp bin
-    public static final int PickUpBinPos[] = {700,1200, -90};
-    public static final int PickUpBin2Pos[] = {700,2600, -90};
+    public static final int PickUpBinPos[] = {700,1100, -90};
+    public static final int PickUpBin2Pos[] = {700,2450, -90};
     //These are coordinates of the red colored target area (NOTE: indicate the angle of orientation)
     public static final int RedPos[] = {1500, 1800, -90};//{1400,1800,-90};//{2000,3100, -90};
   
@@ -47,7 +47,7 @@ public class Layout {
     public static final int GreenPos[] = {175,2660, 90};
 
     //These are coordinates of the blue colored target area
-    public static final int BluePos[] = {200,1800, 90};//{1400,3350,-90};//{1000,1800, -90};
+    public static final int BluePos[] = {300,1800, 90};//{1400,3350,-90};//{1000,1800, -90};
 
     //These are coordinates of the trolleys (NOTE: indicate the angle of orientation) use 1 for 0 and 179 f0r 180
     public static final int T1Pos[] = {150,4350, 45};

@@ -17,13 +17,14 @@ public class Rotate2Orientation extends MoveRobot {
     // private static double convertPxToMM = 0.1/50;
     // private final double _startSpeed;
     private double m_angle =0;
+    private double s_angle = 0;
     /**
      * This command is used to align the robot to the object that is to be picked
      */
     public Rotate2Orientation(double angle){
         super(2, 0, 0, 0, 0.3);
         
-        Globals.curAngle = angle;
+        s_angle = angle;
     }
      /**
      * Runs before execute
@@ -31,9 +32,9 @@ public class Rotate2Orientation extends MoveRobot {
     @Override
     public void initialize()
     {   
-        m_angle = Globals.curAngle;
+        m_angle = s_angle;
         m_angle = m_angle - Globals.curDir;
-        // Globals.curAngle = m_angle;
+        Globals.curAngle = m_angle;
         if (m_angle>180)
             m_angle  = m_angle - 360;
         else if (m_angle<-180)
@@ -41,7 +42,7 @@ public class Rotate2Orientation extends MoveRobot {
         else 
             m_angle = m_angle + 0;
         m_angle = m_angle * (Math.PI/180);
-        // Globals.curAngle = m_angle;   
+           
         super.m_dist = m_angle;
         super.initialize();
     }

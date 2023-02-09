@@ -23,9 +23,9 @@ public class Vision extends SubsystemBase{
     // private final NetworkTableEntry D_cW = tab.add("cW", 0).getEntry();
     private final NetworkTableEntry D_curTarget = tab.add("curTarget", 0).getEntry();
     private final NetworkTableEntry D_curBin = tab.add("curBin", 0).getEntry();
-    private final NetworkTableEntry D_JagabeeCount = tab.add("JagCnt", 0).getEntry();
-    private final NetworkTableEntry D_DettolCount = tab.add("DettolCnt", 0).getEntry();
-    private final NetworkTableEntry D_CokeCount = tab.add("CokeCnt", 0).getEntry();
+    // private final NetworkTableEntry D_JagabeeCount = tab.add("JagCnt", 0).getEntry();
+    // private final NetworkTableEntry D_DettolCount = tab.add("DettolCnt", 0).getEntry();
+    // private final NetworkTableEntry D_CokeCount = tab.add("CokeCnt", 0).getEntry();
     
     private final static Arm m_arm = RobotContainer.m_arm;
     // private final String[] items = {
@@ -108,6 +108,7 @@ public class Vision extends SubsystemBase{
      Globals.curTarget = 0;
      Globals.curItemType = 0;
      Globals.curAngle = 0;
+     m_arm.setCameraAngle(280);
       
     }
     @Override
@@ -116,8 +117,8 @@ public class Vision extends SubsystemBase{
         D_curBin.setNumber(Globals.curBin);
         D_curTarget.setNumber(Globals.curTarget);
         D_currentItem.setNumber(Globals.curItemType);
-        D_currentItemX.setNumber(Globals.curItemX);
-        D_currentItemY.setNumber(Globals.curItemY);
+        // D_currentItemX.setNumber(Globals.curItemX);
+        // D_currentItemY.setNumber(Globals.curItemY);
         // D_JagabeeCount.setNumber(getObjects()[0]);
         // D_DettolCount.setNumber(getObjects()[3]);
         // D_CokeCount.setNumber(getObjects()[6]);
