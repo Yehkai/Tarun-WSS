@@ -70,7 +70,12 @@ public class OmniDrive extends SubsystemBase
     private final NetworkTableEntry D_odometry2 = tab.add("odo A", 0).getEntry();
     private final NetworkTableEntry D_angle = tab.add("angle", 0).getEntry();
     private final NetworkTableEntry D_Global = tab.add(" dir", 0).getEntry();
-    private final NetworkTableEntry D_motor = tab.add("motor", 0).getEntry();
+    // private final NetworkTableEntry D_motorout = tab.add("motorout", 0).getEntry();
+    // private final NetworkTableEntry D_motor0 = tab.add("motor0", 0).getEntry();
+    // private final NetworkTableEntry D_motor1 = tab.add("motor1", 0).getEntry();
+    // private final NetworkTableEntry D_motorout1 = tab.add("motorout1", 0).getEntry();
+    // private final NetworkTableEntry D_motorout2 = tab.add("motorout2", 0).getEntry();
+    // private final NetworkTableEntry D_motor2 = tab.add("motor2", 0).getEntry();
     //Subsystem for omnidrive
     public OmniDrive() {
 
@@ -385,8 +390,13 @@ public class OmniDrive extends SubsystemBase
         D_odometry2.setDouble(value[2]);
         // getDir();
         Globals.curDir = m_odometry.getPose().getRotation().getDegrees();
-        D_motor.setDouble(motorOuts[0]);
-        // D_angle.setDouble(Globals.curAngle);
-        // D_Global.setDouble(Globals.curDir);
+        // D_motorout.setDouble(motorOuts[0]);
+        // D_motorout1.setDouble(motorOuts[1]);
+        // D_motorout2.setDouble(motorOuts[2]);
+        // D_motor0.setDouble(motors[0].get());
+        // D_motor1.setDouble(motors[1].get());
+        // D_motor2.setDouble(motors[2].get());
+        D_angle.setDouble(Globals.curAngle);
+        D_Global.setDouble(Globals.curDir);
     }
 }

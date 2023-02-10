@@ -20,7 +20,7 @@ public class ArmPickX extends MoveArm {
     private final static Arm m_arm = RobotContainer.m_arm;
     private final static Sensor m_sensor = RobotContainer.m_sensor;
 
-    private double pickUpHeight = 0.03;
+    private double pickUpHeight = 0.01;
     private double ratio = 0;
     private int m_type;
     /**

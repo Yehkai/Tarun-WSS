@@ -37,7 +37,7 @@ public class AlignPicker extends MoveRobot {
             ratio = Globals.CokeRatio;
         else
             ratio = 1;
-        super.m_dist = ((Globals.curItemX -400 ) * Globals.convertPxToM)*ratio-0.01;
+        super.m_dist = ((Globals.curItemX -400 ) * Globals.convertPxToM)*ratio-0.015;
         super.initialize();
     }
 }

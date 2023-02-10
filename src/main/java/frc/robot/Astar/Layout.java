@@ -44,7 +44,7 @@ public class Layout {
     public static final int RedPos[] = {1500, 1800, -90};//{1400,1800,-90};//{2000,3100, -90};
   
     //These are coordinates of the green colored target area
-    public static final int GreenPos[] = {175,2660, 90};
+    public static final int GreenPos[] = {175,1800, 90};
 
     //These are coordinates of the blue colored target area
     public static final int BluePos[] = {300,1800, 90};//{1400,3350,-90};//{1000,1800, -90};

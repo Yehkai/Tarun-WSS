@@ -44,8 +44,8 @@ public class ViewItem extends SequentialCommandGroup
         
         super(
         //new MoveArm(new Translation2d(0.33,0.24), 0.5), // Line detection position
-        new MoveArm(new Translation2d(0.24,0.1), 0.5),
-        new MoveCamera(265),
+        new MoveArm(new Translation2d(0.21,0.1), 0.5),
+        new MoveCamera(273),
         new InstantCommand(()-> Globals.cvMode=1),  
         new WaitCommand(3),
         new InstantCommand(()-> Globals.cvMode=-1),

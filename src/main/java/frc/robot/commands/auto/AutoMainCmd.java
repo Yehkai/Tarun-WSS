@@ -95,13 +95,5 @@ public class AutoMainCmd extends SequentialCommandGroup
               );
             
     }
-    @Override
-    public void initialize(){
-        
-        super.initialize();
-        RobotContainer.m_omnidrive.initialise();
-        RobotContainer.m_arm.initialize();
-        RobotContainer.m_vision.initialize();
     
-    }
 }
